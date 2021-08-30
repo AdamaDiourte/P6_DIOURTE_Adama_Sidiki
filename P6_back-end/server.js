@@ -1,5 +1,5 @@
-const http = require("http");
-const app = require("./app");
+const http = require("http"); /*Import du pakage http*/
+const app = require("./app"); /*Import de la méthode EXPRESS stokée dans la constante app*/
 
 const normalizePort = val =>{
     const port = parseInt(val, 10);
@@ -14,7 +14,7 @@ const normalizePort = val =>{
     
 };
 
-const port = normalizePort(process.env.PORT || "3000");
+const port = normalizePort(process.env.PORT || "3000"); /*Ecoute de l'environnement utilisé sinon c'est le port 3000 qui est écouté par défaut*/
 app.set("port", port);
 
 const errorHandler = error =>{
@@ -37,7 +37,7 @@ const errorHandler = error =>{
     }
 };
 
-const server = http.createServer(app);
+const server = http.createServer(app); /* constante contenant le résulat de la requête http traitée par EXPRESS*/
 
 server.on("error", errorHandler);
 server.on("listening", ()=>{
@@ -47,10 +47,7 @@ server.on("listening", ()=>{
 });
 
 
-server.listen(process.env.PORT || 3000);
+server.listen(process.env.PORT || 3000); /* Le server utilise le port local ou le port 3000 par défaut*/
 
-// server.listen(port);
 
-app.set("port", process.env.PORT || 3000);
-
-// server.listen(process.env.PORT || 3000);
+app.set("port", process.env.PORT || 3000); /*L'application utilise le port local ou le port 3000 par défaut*/

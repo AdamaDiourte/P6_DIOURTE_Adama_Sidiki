@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken"); /*Import du package jsonwebtoken*/
 
 module.exports = (req, res, next)=>{
     try{
@@ -12,6 +12,6 @@ module.exports = (req, res, next)=>{
         }
 
     } catch(error){
-        res.status(401).json({error: error || "L'authentification a échoué"})
+        res.status(401).json({error: error | "L'authentification a échoué"})
     };
 };

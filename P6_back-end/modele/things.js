@@ -1,5 +1,7 @@
-const mongoose = require("mongoose"); 
+// Le schema des données envoyées dans le server
+const mongoose = require("mongoose"); /*Import de MONGOOSE pour construire un schema de données*/
 
+// On utlise la méthode schema du package Mongoose
 const thingsSchema = mongoose.Schema({
     title: {type: String, required: true},
     description: {type: String, required: true},
@@ -8,4 +10,4 @@ const thingsSchema = mongoose.Schema({
     price: {type: Number, required: true}
 });
 
-module.exports = mongoose.model("thing", thingsSchema);
+module.exports = mongoose.model("thing", thingsSchema); /* Exporte le modèle du schema de donnés créé*/

@@ -1,19 +1,21 @@
-const multer = require("multer");
+const multer = require("multer"); /*Import du Package MULTER*/
 
+//Dictionnaire d'extension d'image
 const MINE_TYPE = {
     "image/jpg": "jpg",
     "image/jpeg": "jpg",
     "image/png": "png"
 };
 
+// Objet de configuration MULTER
 const storage = multer.diskStorage({
     destination: (req, file, callback)=>{
-        callback(null, "images")
+        callback(null, "images") /*Dossier d'enregistrement des fichiers*/
     },
     filename: (req, file, callback)=>{
         const name = file.originalname.split("").join("_"); 
         const extension = MINE_TYPE[flie.minetype];
-        callback(null, name + Date.now() + "." + extension);
+        callback(null, name + Date.now() + "." + extension); /*Modèle de nomination des fichiers*/
     }
 });
 
