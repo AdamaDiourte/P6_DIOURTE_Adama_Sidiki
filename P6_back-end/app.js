@@ -14,8 +14,7 @@ useUnifiedTopology: true })
 .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 // Les middleware qui définissent les coditions d'accès à l'application 
-app.use(cors()) 
-
+app.use(cors());
 
 // => {
 
