@@ -4,7 +4,7 @@ const mongoose = require('mongoose'); /*Import du package MONGOOSE pour la gesti
 const saucesRoutes = require("./routes/sauces"); /*Import des routes*/
 const userRoutes = require("./routes/user"); /*Import de la route User depuis le dossier routes*/
 const path = require("path"); /*Import de Path depuis Node pour avoir accès au chemin des fichiers*/
-
+const cors = require("cors"); /*import cors*/
 const app = express(); /* constante contenant la methode EXPRESS */
 
 mongoose.connect('mongodb+srv://Adama:Ad280186@cluster0.vmlml.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', /* Lien de la base de données sur MongoBD*/
@@ -14,12 +14,16 @@ useUnifiedTopology: true })
 .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 // Les middleware qui définissent les coditions d'accès à l'application 
-app.use((req, res, next)=> {
-    res.setHeader("Access-Control-Allow-Origin", "*"); /*Tout le monde doit avoir accès*/
-    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-with, Content, Accept, Content-type, Autorization");
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
-    next();
-});
+app.use(cors()) 
+
+
+// => {
+
+//     // res.setHeader("Access-Control-Allow-Origin", "*"); /*Tout le monde doit avoir accès*/
+//     // res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-with, Content, Accept, Content-type, Autorization");
+//     // res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
+//     // next();
+// };
 
 
 app.use(bodyParser.json()); /*Formate en JSON les données envoyées depuis le Front-end pour qu'elles soient lisibles par JavaScript*/

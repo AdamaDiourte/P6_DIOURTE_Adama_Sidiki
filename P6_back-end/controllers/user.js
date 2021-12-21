@@ -1,12 +1,12 @@
 const bcrypt = require("bcrypt"); /*Import du package BRCYPT pour le cryptage des mots de passe*/
-const user = require("../modele/user"); /*Import de User depuis le dossier modele*/
+const usermodel = require("../modele/user"); /*Import de User depuis le dossier modele*/
 const jwt = require("jsonwebtoken"); /*Import du package jsonwebtoken*/
 
 // Fonction pour permettre aux utilisateurs de s'inscrire
 exports.signup = (req, res, next)=> {
     bcrypt.hash(req.body.password, 10) /*Le mot de passe est hashé 10 fois*/
     .then(hash => {
-        const user = new user({
+        const user = new usermodel({
             email: req.body.email,
             password: hash
         });
@@ -20,9 +20,9 @@ exports.signup = (req, res, next)=> {
 
 // Fonction permettant aux utisateurs existants de se connecter
 exports.login = (req, res, next)=> {
-    user.findOne({email: req.body.email})
+    usermodel.findOne({email: req.body.email})
     .then(user => {
-        if(user){
+        if(!user){
             // S'il ne trouve pas l'utilisateur 
             return res.status(401).json({error: "Ce compte n'existe pas"});
         }
@@ -37,14 +37,17 @@ exports.login = (req, res, next)=> {
             res.status(200).json({
                 userId: user._id,
                 token:jwt.sign(
-                    {usrId: user_id},
+                    {usrId: user._id},
                     "RANDOM_TOKEN_SECRET",
-                    {expiresId: "24h"}
+                    {expiresIn: "24h"}
 
                 )
             });
         })
+
         .catch(error =>res.status(500).json({error}));
     })
     .catch(error =>res.status(500).json({error}));
+    
+
 };
