@@ -31,7 +31,7 @@ exports.modifySauce = (req, res, next) =>{
 };
 
 
-// Export de la logique route supprimer un objet
+// Export de la logique route pour supprimer un objet
 exports.deleteSauce = (req, res, next) =>{
     sauceModel.findOne({_id: req, res, next}) /*Pour cibler l'objet à supprimer de la base de données*/
         .then(sauce => {
@@ -49,7 +49,7 @@ exports.deleteSauce = (req, res, next) =>{
 // Export de la logique route pour afficher un seul objet
 exports.getOneSauce = (req, res, next)=> {
     sauceModel.findOne({_id: req.params.id})
-        .then(sauce => res.status(200).json({sauce}))
+        .then(sauce => res.status(200).json(sauce))
         .catch(error =>res.status(404).json({error}));
 };
 
@@ -57,6 +57,6 @@ exports.getOneSauce = (req, res, next)=> {
 // Export de la logique route pour afficher tous les objets
 exports.getAllSauces = (req, res, next)=>{
     sauceModel.find()
-        .then(sauces => res.status(200).json({sauces}))
+        .then(sauces => res.status(200).json(sauces))
         .catch(error => res.status(400).json({error}));
 };
