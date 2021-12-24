@@ -1,5 +1,8 @@
 const http = require("http"); /*Import du pakage http*/
 const app = require("./app"); /*Import de la méthode EXPRESS stokée dans la constante app*/
+const dotenv = require("dotenv"); /*Import de package dotenv pour l'utisation des variables d'enrionnement*/
+const dotenvResult = dotenv.config();
+
 
 const normalizePort = val =>{
     const port = parseInt(val, 10);
@@ -14,7 +17,7 @@ const normalizePort = val =>{
     
 };
 
-const port = normalizePort(process.env.PORT || "3000"); /*Ecoute de l'environnement utilisé sinon c'est le port 3000 qui est écouté par défaut*/
+const port = normalizePort(process.env.PORT); /*Ecoute de l'environnement utilisé sinon c'est le port 3000 qui est écouté par défaut*/
 app.set("port", port);
 
 const errorHandler = error =>{
@@ -47,8 +50,8 @@ server.on("listening", ()=>{
 });
 
 
-server.listen(process.env.PORT || 3000); /* Le server utilise le port local ou le port 3000 par défaut*/
+server.listen(process.env.PORT); /* Le server utilise le port local ou le port 3000 par défaut*/
 
 
-app.set("port", process.env.PORT || 3000); /*L'application utilise le port local ou le port 3000 par défaut*/
+app.set("port", process.env.PORT); /*L'application utilise le port local ou le port 3000 par défaut*/
 

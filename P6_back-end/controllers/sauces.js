@@ -31,6 +31,8 @@ exports.modifySauce = (req, res, next) =>{
 };
 
 
+
+
 // Export de la logique route pour supprimer un objet
 exports.deleteSauce = (req, res, next) =>{
     sauceModel.findOne({_id: req, res, next}) /*Pour cibler l'objet à supprimer de la base de données*/
@@ -60,3 +62,4 @@ exports.getAllSauces = (req, res, next)=>{
         .then(sauces => res.status(200).json(sauces))
         .catch(error => res.status(400).json({error}));
 };
+
