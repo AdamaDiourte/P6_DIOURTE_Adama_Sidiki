@@ -1,13 +1,19 @@
 const bcrypt = require("bcrypt"); /*Import du package BRCYPT pour le cryptage des mots de passe*/
 const usermodel = require("../modele/user"); /*Import de User depuis le dossier modele*/
 const jwt = require("jsonwebtoken"); /*Import du package jsonwebtoken*/
+const cryptojs = require("crypto-js"); /*Import du pakage crypto-js pour hascher l'email*/
+//const dotenv = require("dotenv"); /* Import du package dotenv pour la variable d'environnement*/
+// result= dotenv.config();
 
 // Fonction pour permettre aux utilisateurs de s'inscrire
 exports.signup = (req, res, next)=> {
+    //const emailCryptojs = cryptojs.HmacSHA256(req.body.email, `${process.env.CRYPTOJS_EMAIL}`).toString();
+    
     bcrypt.hash(req.body.password, 10) /*Le mot de passe est hashé 10 fois*/
     .then(hash => {
         const user = new usermodel({
             email: req.body.email,
+            //email: emailCryptojs,
             password: hash
         });
         user.save() /*Enregistre le mail et le mot de passe dans la base de données*/
