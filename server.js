@@ -1,11 +1,6 @@
-const http = require ("http"); // import du package http
-       
-const app = require ("./app"); // import de l'application app
-
-const dotenv = require("dotenv").config(); // import du package dotenv pour utiliser les varaibles d'environement
-// const result = dotenv.config();
-
-
+const http = require ("http"); // Import du package http d'Express
+const app = require ("./app"); // Import de l'application app
+const dotenv = require("dotenv").config(); // Import du package dotenv pour utiliser les varaibles d'environement
 const server = http.createServer(app);// Création du server avec la méthode CreateServer qui sera appelée à chaque requete
 
 // Paramétrage du port avec la méthode set()
@@ -43,12 +38,6 @@ const errorHandler = error =>{
     }
 };
 
-
-
-
 app.set("port", process.env.PORT);
-
-
 server.listen(process.env.PORT ||3000);
-
 console.log("Le serveur fonctione");

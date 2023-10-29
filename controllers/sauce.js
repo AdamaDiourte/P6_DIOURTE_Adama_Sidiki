@@ -4,16 +4,12 @@ const fs = require('fs');
 
 // Création d'une nouvelle sauce
 exports.createSauce = (req, res, next) => {
-
     // Récupération des détails de la sauce à partir de la requête
     const sauceObject = JSON.parse(req.body.sauce);
-
     // Construction de l'URL pour l'image téléchargée
     sauceObject.imageUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
-
     // Création de la sauce à partir du modèle
     const sauce = new sauceModel({ ...sauceObject });
-
     // Enregistrement de la sauce dans la base de données
     sauce
         .save()
@@ -29,27 +25,13 @@ exports.getAllsauce = (req, res, next) => {
         .then(sauces => res.status(200).json(sauces))
         .catch(error => res.status(500).json({ error }));
 };
-
 // Récupération d'une sauce spécifique par ID
 exports.getOneSauce = (req, res, next) => {
     sauceModel.findOne({ _id: req.params.id })
         .then(sauce => res.status(200).json(sauce))
         .catch(error => res.status(500).json({ error }));
 };
-
-// Modification d'une sauce
-// exports.modifyOneSauce = (req, res, next) => {
-//     const sauceObject = req.file ? 
-//         {
-//             ...JSON.parse(req.body.sauce),
-//             imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-//         } : { ...req.body };
-
-//     sauceModel.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
-//         .then(() => res.status(200).json({ message: 'Sauce modifiée!' }))
-//         .catch(error => res.status(400).json({ error }));
-// };
-
+// Pour modifier un fichier
 exports.modifyOneSauce = (req, res, next) => {
     const sauceObject = req.file ? 
         {
@@ -69,7 +51,6 @@ exports.modifyOneSauce = (req, res, next) => {
                         res.status(500).json({ error: 'Erreur lors de la suppression de l\'ancienne image.' });
                         return;
                     }
-
                     // Une fois l'ancienne image supprimée, mettez à jour les informations de la sauce.
                     updateSauceData(sauceObject, req, res);
                 });
@@ -86,19 +67,7 @@ function updateSauceData(sauceObject, req, res) {
         .then(() => res.status(200).json({ message: 'Sauce modifiée!' }))
         .catch(error => res.status(400).json({ error }));
 }
-
-
-
-
-
-// Suppression d'une sauce
-// exports.deleteOneSauce = (req, res, next) => {
-//     sauceModel.deleteOne({ _id: req.params.id })
-//         .then(() => res.status(200).json({ message: 'Sauce supprimée !' }))
-//         .catch(error => res.status(400).json({ error }));
-// };
-
-
+//Pour supprimer une saauce
 exports.deleteOneSauce = (req, res, next) => {
     // Récupérez la sauce de la base de données pour obtenir le nom du fichier image
     sauceModel.findOne({ _id: req.params.id })

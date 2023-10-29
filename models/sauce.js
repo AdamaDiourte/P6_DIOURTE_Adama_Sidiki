@@ -18,14 +18,4 @@ const Schema = new mongoose.Schema({
     usersDisliked: [String],  // Liste des ID des utilisateurs qui n'ont "pas aimé" le produit
 });
 
-
-// // Schema pour le projet 7
-// const schema = newSchema = mongoose.schema ({
-//     userId: {type: String, required: true},
-//     nom : {type: String, required: true},
-//     prenom : {type: String, required: true},
-//     age : {type: Number, required:true}
-// });
-// module.exports = mongoose.model("ficheUser", schema); /* Exporte le modèle du schema de donnés créé*/
-
 module.exports = mongoose.model("sauce", Schema); /* Exporte le modèle du schema de donnés créé*/

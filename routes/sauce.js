@@ -4,21 +4,15 @@ const router = express.Router(); // import de la foction router d'Express
 const multer = require('../middleware/multer-config.js');
 const auth = require('../middleware/auth.js');
 const likeController = require("../controllers/like.js"); // Importez le contrôleur de like
-console.log("ROUTES SAUCE :"+sauceController);
 
-// Route pour créer une sauce 
-//router.post('/', sauceController.createSauce); // Pour créer une sauce
-router.post('/', auth, multer, sauceController.createSauce); // Pour créer une sauce
-router.get('/', auth, sauceController.getAllsauce); // Pour affcihier toutes les sauces
 
-router.get('/:id',auth, sauceController.getOneSauce); // Pour afficher une seule sauce
-
-router.put('/:id', auth, multer, sauceController.modifyOneSauce); // Pour modifier des données d'une sauce
-
-router.delete('/:id', auth, sauceController.deleteOneSauce); // Pour supprimer une sauce créé
-
-// Route pour liker ou disliker une sauce
-router.post('/:id/like', auth, likeController.likeOrDislikeSauce);
+// LES DIFFERRENTES ROUTES 
+router.post('/', auth, multer, sauceController.createSauce); // Route pour créer une sauce
+router.get('/', auth, sauceController.getAllsauce); // Route pour affcihier toutes les sauces
+router.get('/:id',auth, sauceController.getOneSauce); // Route pour afficher une seule sauce
+router.put('/:id', auth, multer, sauceController.modifyOneSauce); // Route pour modifier des données d'une sauce
+router.delete('/:id', auth, sauceController.deleteOneSauce); // Route pour supprimer une sauce créé
+router.post('/:id/like', auth, likeController.likeOrDislikeSauce); // Route pour liker ou disliker une sauce
 
 
 module.exports = router;

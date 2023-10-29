@@ -1,14 +1,12 @@
 const passwordValidator = require('password-validator'); // Importation du package pour la validation de mot de passe.
-
-// Création du schéma de validation du mot de passe.
-const passwordSchema = new passwordValidator();
+const passwordSchema = new passwordValidator(); // Création du schéma de validation du mot de passe.
 
 // Définition des règles pour le schéma du mot de passe :
 passwordSchema
 .is().min(5)                                   // Longueur minimale du mot de passe.
 .is().max(15)                                   // Longueur maximale du mot de passe.
-.has().uppercase()                             // Le mot de passe doit contenir au moins une lettre majuscule.
-.has().lowercase()                             // Le mot de passe doit contenir au moins une lettre minuscule.
+.has().uppercase(1)                             // Le mot de passe doit contenir au moins une lettre majuscule.
+.has().lowercase(1)                             // Le mot de passe doit contenir au moins une lettre minuscule.
 .has().digits(2)                               // Le mot de passe doit contenir au moins 2 chiffres.
 .has().not().spaces()                          // Le mot de passe ne doit pas contenir d'espaces.
 .is().not().oneOf(["Password", "password1232"])// Le mot de passe ne doit pas être l'un des éléments indiqués dans le tableau.

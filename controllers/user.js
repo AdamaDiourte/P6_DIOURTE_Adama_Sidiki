@@ -2,8 +2,7 @@
 const User = require("../models/user"); // Modèle d'utilisateur pour MongoDB
 const bcrypt = require("bcrypt");       // Bibliothèque pour hasher les mots de passe
 const cryptojs = require("crypto-js");  // Bibliothèque pour chiffrer l'email
-const dotenv = require("dotenv");       // Pour utiliser des variables d'environnement
-dotenv.config();                        // Initialisation de dotenv
+const dotenv = require("dotenv").config();  // Pour utiliser des variables d'environnement
 const jwt = require("jsonwebtoken"); // importation du controllers webtoken
 
 // Fonction pour la création d'un nouveau compte utilisateur
@@ -23,10 +22,6 @@ exports.signup = (req, res, next) => {
                 email: emailCryptojs,
                 password: hash
             });
-            
-            console.log("MOT DE PASSE DU User");
-            console.log(user);
-            
             // Tentative de sauvegarde du nouvel utilisateur dans la base de données
             user.save()
                 .then(() => res.status(201).json({ message: "Utilisateur créé avec succès" }))
@@ -34,7 +29,6 @@ exports.signup = (req, res, next) => {
                     console.log(error);
                     res.status(400).json({ error }); // Erreur liée à la sauvegarde (par exemple, un email déjà existant)
                 });
-
         })
         .catch((error) => {
             console.log(error);
@@ -48,14 +42,6 @@ exports.login = (req, res, next) => {
     const emailCryptojs = cryptojs
     .HmacSHA256(req.body.email, `${process.env.CLE_CHIFFREMENT_Email_CRYPTO_JS}`)
     .toString();
-    console.log("EMAIL CHIFFRE PAR CRYPTO JS");
-    console.log("EMAIL :", emailCryptojs);
-    
-    console.log("==>CONTENU DU LOGIN req EMAIL");
-    console.log(req.body.email);
-
-    console.log("==>CONTENU DU req LOGIN pasword");
-    console.log(req.body.password);
     // Chercher si l'utilisateur est présent dans la base de données
     User.findOne({email:emailCryptojs})
     .then((user)=>{
@@ -85,10 +71,8 @@ exports.login = (req, res, next) => {
             })
         })
         .catch((error) => res.status(500).json({error}));
-
     })
     .catch((error) => res.status(500).json({error}));
-
 };
 
 

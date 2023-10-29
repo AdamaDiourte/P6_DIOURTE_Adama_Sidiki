@@ -1,11 +1,6 @@
-// Importation du package mongoose pour gérer la connexion à MongoDB
-const mongoose = require('mongoose');
 
-// Importation de dotenv pour la gestion des variables d'environnement 
-const dotenv = require('dotenv');
-
-// Configuration de dotenv pour lire les variables d'environnement
-dotenv.config();
+const mongoose = require('mongoose'); // Importation du package mongoose pour gérer la connexion à MongoDB
+const dotenv = require('dotenv').config(); // Importation de dotenv pour la gestion des variables d'environnement 
 
 // Établissement de la connexion à MongoDB avec les informations fournies dans les variables d'environnement
 mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}.mongodb.net/?retryWrites=true&w=majority`,

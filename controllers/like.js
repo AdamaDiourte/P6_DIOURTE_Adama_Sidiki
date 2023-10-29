@@ -1,11 +1,10 @@
 const sauceModel = require('../models/sauce');
 
-// Logique du Like et dislik
-
+// Logique du Like et dislike
 exports.likeOrDislikeSauce = (req, res, next) => {
     const userId = req.body.userId;
     const likeValue = req.body.like;
-
+    
     switch (likeValue) {
         case 1: // Cas où l'utilisateur like la sauce
             sauceModel.updateOne(
