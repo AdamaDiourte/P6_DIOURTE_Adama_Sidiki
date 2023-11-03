@@ -9,10 +9,9 @@ const likeController = require("../controllers/like.js"); // Importez le contrô
 // LES DIFFERRENTES ROUTES 
 router.post('/', auth, multer, sauceController.createSauce); // Route pour créer une sauce
 router.get('/', auth, sauceController.getAllsauce); // Route pour affcihier toutes les sauces
-router.get('/:id',auth, sauceController.getOneSauce); // Route pour afficher une seule sauce
+router.get('/:id', sauceController.getOneSauce); // Route pour afficher une seule sauce
 router.put('/:id', auth, multer, sauceController.modifyOneSauce); // Route pour modifier des données d'une sauce
 router.delete('/:id', auth, sauceController.deleteOneSauce); // Route pour supprimer une sauce créé
-router.post('/:id/like', auth, likeController.likeOrDislikeSauce); // Route pour liker ou disliker une sauce
-
+router.post('/:id/like', likeController.likeOrDislikeSauce); // Route pour liker ou disliker une sauce
 
 module.exports = router;
