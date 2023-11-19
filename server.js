@@ -40,4 +40,4 @@ const errorHandler = error =>{
 
 app.set("port", process.env.PORT);
 server.listen(process.env.PORT ||3000);
-console.log("Le serveur fonctione");
+console.log("Le serveur fonctionne sur le port: "+ port);
